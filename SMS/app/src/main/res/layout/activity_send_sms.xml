@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendSMS">
+    <Button
+        android:id="@+id/Send"
+        android:layout_width="74dp"
+        android:layout_height="51dp"
+        android:layout_x="150dp"
+        android:layout_y="362dp"
+        android:onClick="onClick2"
+        android:text="Send"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="178dp" />
+
+    <EditText
+        android:id="@+id/msg"
+        android:layout_width="322dp"
+        android:layout_height="228dp"
+        android:layout_x="19dp"
+        android:layout_y="97dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Message:"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <EditText
+        android:id="@+id/tel"
+        android:layout_width="301dp"
+        android:layout_height="wrap_content"
+        android:layout_x="24dp"
+        android:layout_y="26dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Tel"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="28dp" />
+
+</AbsoluteLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "390430363641",
+    "firebase_url": "https://mysms-844ad.firebaseio.com",
+    "project_id": "mysms-844ad",
+    "storage_bucket": "mysms-844ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390430363641:android:03e15c9fd5f719e8",
+        "android_client_info": {
+          "package_name": "com.example.toandx.sms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390430363641-tdf0m3prcp2gkfb0tckcadef6uvbvcbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toandx.sms",
+            "certificate_hash": "ba32da4fb853ba646e12f2a3b989349fe2405623"
+          }
+        },
+        {
+          "client_id": "390430363641-k5eaqu1505hi4s17sqmdko2k5ntf678a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUx6G3_hh586oieLu21A86X2hEbYdEwMw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390430363641-k5eaqu1505hi4s17sqmdko2k5ntf678a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
