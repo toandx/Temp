@@ -8,6 +8,7 @@ import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -49,24 +50,28 @@ public class Activity_Login extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
-    LoginButton loginButton;
-    CallbackManager mCallbackManager;
-    String TAG ="Hey";
-    String name;
+    private LoginButton loginButton;
+    private CallbackManager mCallbackManager;
+    private String TAG ="Hey";
+    private String name;
     private static final int RC_SIGN_IN = 9001;
     private static final int LINE_SIGN_IN=1000;
     public static final String CHANNEL_ID="1602879521";
     private GoogleSignInClient mGoogleSignInClient;
-    SignInButton signin;
+    private SignInButton signIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__login);
+        ActivityCompat.requestPermissions(Activity_Login.this, new String[]{"android.permission.READ_SMS","android.permission.INTERNET",
+                "android.permission.RECEIVE_SMS","android.permission.SEND_SMS",
+        "android.permission.READ_CONTACTS","android.permission.GET_ACCOUNTS",
+                "android.permission.READ_PROFILE"}, 1);
         loginButton = (LoginButton) findViewById(R.id.login_button);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        signin=(SignInButton) findViewById(R.id.sign_in_button);
-        signin.setOnClickListener(new View.OnClickListener() {
+        signIn=(SignInButton) findViewById(R.id.sign_in_button);
+        signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
