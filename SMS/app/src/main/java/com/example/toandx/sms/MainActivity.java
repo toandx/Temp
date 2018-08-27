@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver nhan;
     private ListView list;
     private CustomListAdapter adapter;
-    private FirebaseDatabase database;
+    private FirebaseDatabase dataBase;
     private String uid;
-    ArrayList<String> name;
-    ArrayList<String> info;
-    Uri inboxURI;
-    String[] reqCols;
-    Cursor c;
-    String numphone,body;
+    private ArrayList<String> name;
+    private ArrayList<String> info;
+    private Uri inboxURI;
+    private String[] reqCols;
+    private Cursor c;
+    private String numPhone,body;
     private Bundle data;
     private Message message;
     private Handler handler;
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         uid=intent.getStringExtra("uid");
         name=new ArrayList<String>();
         info=new ArrayList<String>();
-        database=FirebaseDatabase.getInstance();
+        dataBase=FirebaseDatabase.getInstance();
         list=(ListView) findViewById(R.id.listview);
         androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         handler=new Handler()
@@ -144,20 +144,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Get Content Resolver object, which will deal with Content Provider
         ContentResolver cr = getContentResolver();
-
-        // Fetch Inbox SMS Message from Built-in Content Provider
         c = cr.query(inboxURI, reqCols, null, null, null);
+        // Fetch Inbox SMS Message from Built-in Content Provider
         adapter=new CustomListAdapter(this,name,info);
         list.setAdapter(adapter);
         Runnable run1=new Runnable() {
             @Override
             public void run() {
+
                 if (c.moveToFirst())
                 {
                     do {
-                        numphone=c.getString(c.getColumnIndex("address"));
+                        numPhone=c.getString(c.getColumnIndex("address"));
                         Cursor phone = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                                null, ContactsContract.CommonDataKinds.Phone.DATA + "='" + numphone + "'",
+                                null, ContactsContract.CommonDataKinds.Phone.DATA + "='" + numPhone + "'",
                                 null, null);
                         if (phone.moveToFirst()) {
                             String id = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
@@ -165,14 +165,14 @@ public class MainActivity extends AppCompatActivity {
                                     null, ContactsContract.Contacts._ID + "=" + id, null, null);
                             if (phonect.moveToFirst()) {
                                 String s = phonect.getString(phonect.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                                numphone = numphone + "(" + s + ")";
+                                numPhone = numPhone + "(" + s + ")";
                             }
                         }
                         //final String abc=numphone;
                         //final String ten1=c.getString(c.getColumnIndex("body"));
                         data=new Bundle();
                         data.putString("info",c.getString(c.getColumnIndex("body")));
-                        data.putString("name",numphone);
+                        data.putString("name",numPhone);
                         message=new Message();
                         message.setData(data);
                         handler.sendMessage(message);
@@ -217,12 +217,13 @@ public class MainActivity extends AppCompatActivity {
                             s1=s1+"("+s+")";
                         }
                     }
+                    phone.close();
                     name.add(0,s1);
                     info.add(0,s2);
                     Log.d("LOG","Da thuc hien xong");
                 adapter.notifyDataSetChanged();
                 list.invalidateViews();
-                ref=database.getReference("MSG").child(uid).child(androidId);
+                ref=dataBase.getReference("MSG").child(uid).child(androidId);
                 String key=ref.push().getKey();
                 ref.child(key).setValue(s1,s2);
                 Log.d("LOG","Da OK");
@@ -258,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
     public void Upload()
     {
         Log.d("LOG","Upload "+uid+" "+androidId+" "+Integer.toString(name.size()));
-        ref=database.getReference().child("MSG").child(uid).child(androidId);
+        ref=dataBase.getReference().child("MSG").child(uid).child(androidId);
         ref.removeValue();
         for(int i=0;i<name.size();++i)
         {
@@ -269,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void Download()
     {
-        ref=database.getReference("MSG").child(uid);
+        ref=dataBase.getReference("MSG").child(uid);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
